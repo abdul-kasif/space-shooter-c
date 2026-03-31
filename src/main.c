@@ -1,6 +1,7 @@
+#include "screen.h"
+#include "terminal.h"
 #include <stdbool.h>
 #include <stdio.h>
-#include <terminal.h>
 #include <termios.h>
 #include <unistd.h>
 
@@ -10,7 +11,8 @@ int main(void) {
   clear_terminal();
 
   TerminalSize ts = get_terminal_size();
-  printf("coloum size: %d, row size: %d\n", ts.cols, ts.rows);
+
+  draw_border(ts.cols, ts.rows);
 
   printf("Press any key except 'q': \n");
 
