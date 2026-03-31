@@ -6,7 +6,7 @@
 
 static struct termios old_termios;
 
-void enable_raw_mode() {
+void enable_raw_mode(void) {
   struct termios raw;
   tcgetattr(STDIN_FILENO, &old_termios);
   atexit(disable_raw_mode);
@@ -20,9 +20,20 @@ void enable_raw_mode() {
   tcsetattr(STDIN_FILENO, TCSANOW, &raw);
 }
 
-void disable_raw_mode() { tcsetattr(STDIN_FILENO, TCSANOW, &old_termios); }
+void disable_raw_mode(void) { tcsetattr(STDIN_FILENO, TCSANOW, &old_termios); }
 
-void clear_terminal() {
+int read_key(void) {
+  char c;
+  ssize_t n = read(STDIN_FILENO, &c, 1);
+
+  if (n == 1) {
+    return (unsigned char)c;
+  }
+
+  return -1;
+}
+
+void clear_terminal(void) {
   printf("\033c");
   fflush(stdout);
 }

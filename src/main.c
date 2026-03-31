@@ -6,18 +6,24 @@
 
 int main(void) {
   enable_raw_mode();
-  int i = 0;
-  while (true) {
-    clear_terminal();
 
-    printf("Just Checking ");
-    sleep(1);
-    if (i > 3) {
+  clear_terminal();
+  printf("Press any key except 'q': \n");
+
+  while (true) {
+    int key = read_key();
+
+    if (key == -1) {
+      continue;
+    }
+
+    if (key == 'q' || key == 'Q') {
       break;
     }
-    i++;
+
+    printf("%c\n", key);
   }
+  clear_terminal();
   disable_raw_mode();
-  printf("Hello World\n");
   return 0;
 }
