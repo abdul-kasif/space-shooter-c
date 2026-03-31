@@ -8,6 +8,10 @@ int main(void) {
   enable_raw_mode();
 
   clear_terminal();
+
+  TerminalSize ts = get_terminal_size();
+  printf("coloum size: %d, row size: %d\n", ts.cols, ts.rows);
+
   printf("Press any key except 'q': \n");
 
   while (true) {
@@ -21,7 +25,8 @@ int main(void) {
       break;
     }
 
-    printf("%c\n", key);
+    printf("%c ", key);
+    fflush(stdout);
   }
   clear_terminal();
   disable_raw_mode();

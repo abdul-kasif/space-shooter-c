@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/ioctl.h>
 #include <terminal.h>
 #include <termios.h>
 #include <unistd.h>
@@ -25,12 +26,20 @@ void disable_raw_mode(void) { tcsetattr(STDIN_FILENO, TCSANOW, &old_termios); }
 int read_key(void) {
   char c;
   ssize_t n = read(STDIN_FILENO, &c, 1);
-
   if (n == 1) {
     return (unsigned char)c;
   }
-
   return -1;
+}
+
+TerminalSize get_terminal_size(void) {
+  struct winsize ws;
+  TerminalSize size = {0, 0};
+  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == 0) {
+    size.cols = ws.ws_col;
+    size.rows = ws.ws_row;
+  }
+  return size;
 }
 
 void clear_terminal(void) {
