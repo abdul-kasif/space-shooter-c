@@ -43,6 +43,6 @@ TerminalSize get_terminal_size(void) {
 }
 
 void clear_terminal(void) {
-  printf("\033c");
+  printf("\033[H\033[2J\033[3J");
   fflush(stdout);
 }
