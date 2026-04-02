@@ -12,7 +12,7 @@ int main(void) {
 
   TerminalSize ts = get_terminal_size();
 
-  char grid[GRID_HEIGHT][GRID_WIDTH];
+  char grid[GRID_ROWS][GRID_COLS];
 
   draw_border(grid);
   draw_shooter_on_grid(grid);

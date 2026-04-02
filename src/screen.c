@@ -7,11 +7,11 @@
 #define EMPTY_CHAR ' '
 #define SHOOTER_CHAR '$'
 
-#define SHOOTER_ROW GRID_HEIGHT - 2
+#define SHOOTER_ROW GRID_ROWS - 2
 
 static void compute_screen_offsets(int *left, int *top, const TerminalSize ts) {
-  *left = (ts.cols - GRID_WIDTH) / 2;
-  *top = (ts.rows - GRID_HEIGHT) / 2;
+  *left = (ts.cols - GRID_COLS) / 2;
+  *top = (ts.rows - GRID_ROWS) / 2;
 
   if (*left < 0)
     *left = 0;
@@ -31,32 +31,31 @@ static void print_top_padding(int top) {
   }
 }
 
-static void draw_horizontal_border(int row,
-                                   char grid[GRID_HEIGHT][GRID_WIDTH]) {
-  for (int i = 0; i < GRID_WIDTH; i++) {
+static void draw_horizontal_border(int row, char grid[GRID_ROWS][GRID_COLS]) {
+  for (int i = 0; i < GRID_COLS; i++) {
     grid[row][i] = BORDER_CHAR;
   }
 }
 
-void draw_border(char grid[GRID_HEIGHT][GRID_WIDTH]) {
+void draw_border(char grid[GRID_ROWS][GRID_COLS]) {
 
   // Top border
   draw_horizontal_border(0, grid);
 
   // Middle area
-  for (int i = 1; i < GRID_HEIGHT - 1; i++) {
+  for (int i = 1; i < GRID_ROWS - 1; i++) {
     grid[i][0] = BORDER_CHAR;
-    for (int j = 1; j < GRID_WIDTH - 1; j++) {
+    for (int j = 1; j < GRID_COLS - 1; j++) {
       grid[i][j] = EMPTY_CHAR;
     }
 
-    grid[i][GRID_WIDTH - 1] = BORDER_CHAR;
+    grid[i][GRID_COLS - 1] = BORDER_CHAR;
   }
 
-  draw_horizontal_border(GRID_HEIGHT - 1, grid);
+  draw_horizontal_border(GRID_ROWS - 1, grid);
 }
 
-void render_grid(const TerminalSize ts, char grid[GRID_HEIGHT][GRID_WIDTH]) {
+void render_grid(const TerminalSize ts, char grid[GRID_ROWS][GRID_COLS]) {
 
   int left_pad = 0;
   int top_pad = 0;
@@ -65,15 +64,15 @@ void render_grid(const TerminalSize ts, char grid[GRID_HEIGHT][GRID_WIDTH]) {
 
   print_top_padding(top_pad);
 
-  for (int i = 0; i < GRID_HEIGHT; i++) {
+  for (int i = 0; i < GRID_ROWS; i++) {
     print_left_padding(left_pad);
-    for (int j = 0; j < GRID_WIDTH; j++) {
+    for (int j = 0; j < GRID_COLS; j++) {
       putchar(grid[i][j]);
     }
     putchar('\n');
   }
 }
 
-void draw_shooter_on_grid(char grid[GRID_HEIGHT][GRID_WIDTH]) {
-  grid[SHOOTER_ROW][GRID_WIDTH / 2] = SHOOTER_CHAR;
+void draw_shooter_on_grid(char grid[GRID_ROWS][GRID_COLS]) {
+  grid[SHOOTER_ROW][GRID_COLS / 2] = SHOOTER_CHAR;
 }
