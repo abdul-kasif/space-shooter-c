@@ -2,9 +2,11 @@
 #define SCREEN_H
 
 #include "terminal.h"
-#define SCREEN_WIDTH 80
-#define SCREEN_HEIGHT 20
 
-void draw_border(const TerminalSize ts);
+#define GRID_WIDTH 80
+#define GRID_HEIGHT 20
+
+void draw_border(char grid[GRID_HEIGHT][GRID_WIDTH]);
+void render_grid(const TerminalSize ts, char grid[GRID_HEIGHT][GRID_WIDTH]);
 
 #endif // !SCREEN_H

@@ -12,7 +12,10 @@ int main(void) {
 
   TerminalSize ts = get_terminal_size();
 
-  draw_border(ts);
+  char grid[GRID_HEIGHT][GRID_WIDTH];
+
+  draw_border(grid);
+  render_grid(ts, grid);
 
   printf("Press any key except 'q': \n");
 
