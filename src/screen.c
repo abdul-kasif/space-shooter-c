@@ -5,9 +5,6 @@
 
 #define BORDER_CHAR '#'
 #define EMPTY_CHAR ' '
-#define SHOOTER_CHAR '$'
-
-#define SHOOTER_ROW GRID_ROWS - 2
 
 static void compute_screen_offsets(int *left, int *top, const TerminalSize ts) {
   *left = (ts.cols - GRID_COLS) / 2;
@@ -71,8 +68,4 @@ void render_grid(const TerminalSize ts, char grid[GRID_ROWS][GRID_COLS]) {
     }
     putchar('\n');
   }
-}
-
-void draw_shooter_on_grid(char grid[GRID_ROWS][GRID_COLS]) {
-  grid[SHOOTER_ROW][GRID_COLS / 2] = SHOOTER_CHAR;
 }

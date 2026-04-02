@@ -7,7 +7,6 @@
 #define GRID_COLS 60 // x
 
 void draw_border(char grid[GRID_ROWS][GRID_COLS]);
-void draw_shooter_on_grid(char grid[GRID_ROWS][GRID_COLS]);
 
 void render_grid(const TerminalSize ts, char grid[GRID_ROWS][GRID_COLS]);
 
