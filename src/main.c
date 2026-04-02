@@ -15,6 +15,8 @@ int main(void) {
   char grid[GRID_HEIGHT][GRID_WIDTH];
 
   draw_border(grid);
+  draw_shooter_on_grid(grid);
+
   render_grid(ts, grid);
 
   printf("Press any key except 'q': \n");
