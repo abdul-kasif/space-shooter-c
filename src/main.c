@@ -12,7 +12,7 @@ int main(void) {
 
   TerminalSize ts = get_terminal_size();
 
-  draw_border(ts.cols, ts.rows);
+  draw_border(ts);
 
   printf("Press any key except 'q': \n");
 
